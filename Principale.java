@@ -7,7 +7,7 @@ public class Principale {
 		}
 
 		public static void main(String[] args) {
-			affiche(100);
+			affiche(10000);
 		}
 	}
 }
