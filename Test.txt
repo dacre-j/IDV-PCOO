@@ -1,5 +1,0 @@
-IDV-PCOO
-========
-
-Premier projet Java ETNA
-En binôme.
