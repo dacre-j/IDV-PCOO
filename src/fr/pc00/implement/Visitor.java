@@ -1,0 +1,96 @@
+package fr.pc00.implement;
+
+import java.util.ArrayList;
+import java.util.List;
+
+import fr.pc00.model.AbstractAttraction;
+import fr.pc00.model.AbstractEntertainment;
+import fr.pc00.model.AbstractShop;
+import fr.pc00.model.EEntertainmentType;
+import fr.pc00.model.state.EClientState;
+import fr.pc00.model.state.IStateChangeable;
+import fr.pc00.model.utils.ProductQuantity;
+import fr.pc00.model.validation.InvalidException;
+
+public class Visitor implements IStateChangeable
+{
+	private List<AbstractEntertainment>	_plan;
+	private EClientState				_state;
+	private int							_number;
+	private int							_tickets;
+
+	public Visitor(int money)
+	{
+		this._plan = new ArrayList<AbstractEntertainment>();
+		this._state = EClientState.VISIT_STARTED;
+		this._number = 0;
+		this._tickets = money;
+	}
+	
+	public void valid(EClientState state) throws InvalidException
+	{
+		if (state == null)
+			throw new InvalidException("Can't execute next state.");
+	}
+
+	public EClientState nextEntertainment() throws InvalidException
+	{
+		AbstractEntertainment current;
+		
+		System.out.println("Getting " + this._number + "/" + this._plan.size());
+
+		if (this._plan.size() < this._number + 1)
+			return (EClientState.VISIT_ENDED);
+		
+		current = this._plan.get(this._number);
+		if (current.getType() == EEntertainmentType.ATTRACTION)
+		{
+			AbstractAttraction attraction = (AbstractAttraction)current;
+			
+			if (this._tickets - (attraction.getPrice() * this._number) < 0)
+				throw new InvalidException("No more tickets ! Too bad...");
+			else
+				this._tickets -= (attraction.getPrice() * this._number);
+		}
+		else if (current.getType() == EEntertainmentType.SHOP)
+		{
+			AbstractShop shop = (AbstractShop)current;
+			ArrayList<ProductQuantity> products = shop.getProducts();
+			int totalPrice = 0;
+			
+			for (int i = 0; i < products.size(); i++)
+			{
+				totalPrice += products.get(i).getProduct().getPrice() * this._number;
+			}
+			if (this._tickets - totalPrice < 0)
+				throw new InvalidException("No more tickets ! Too bad...");
+			else
+				this._tickets -= totalPrice;
+		}
+		++this._number;
+		System.out.println("Searching " + this._number + "/" + this._plan.size() +
+				" : " + current.getState().name());
+		return (current.getState());
+	}
+	
+	public void addEntertainmentToPlan(AbstractEntertainment entertainment)
+	{
+		_plan.add(entertainment);
+	}
+	public String getPlanString()
+	{
+		String str = "";
+		
+		for (int i = 0; i < this._plan.size(); i++)
+		{
+			str += this._plan.get(i) + "\n";
+		}
+		return (str);
+	}
+	
+	public List<AbstractEntertainment> getPlan() { return this._plan; }
+	public EClientState getState() { return this._state; }
+
+	public void setPlan(List<AbstractEntertainment> plan) { this._plan = plan; }
+ 	public void setState(EClientState state) { this._state = state; }
+}
