@@ -59,16 +59,19 @@ public class Main
 
 		try {
 			System.out.println(pierre.toString());
+			System.out.println(pierre.getPlanString());
 			ClientStateMachine.changeStep(pierre);
 			ClientStateMachine.changeStep(pierre);
 			ClientStateMachine.changeStep(pierre);
 			ClientStateMachine.changeStep(pierre);
 			System.out.println(pierre.toString());
+			System.out.println(pierre.getPlanString());
+			ClientStateMachine.changeStep(pierre);
+			System.out.println(pierre.getState());
 			ClientStateMachine.changeStep(pierre);
 			ClientStateMachine.changeStep(pierre);
-			ClientStateMachine.changeStep(pierre);
-			ClientStateMachine.changeStep(pierre);
-			ClientStateMachine.changeStep(pierre);
+			System.out.println(pierre.toString());
+			System.out.println(pierre.getPlanString());
 			ClientStateMachine.changeStep(pierre);
 		} catch (InvalidException e) {
 			System.out.println(e.getMessage());

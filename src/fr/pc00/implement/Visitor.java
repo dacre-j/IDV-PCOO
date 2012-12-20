@@ -42,6 +42,8 @@ public class Visitor implements IStateChangeable
 		if (this._plan.size() < this._number + 1)
 			return (EClientState.VISIT_ENDED);
 		
+		this._state = EClientState.VISIT_STARTED;
+		
 		current = this._plan.get(this._number);
 		if (current.getType() == EEntertainmentType.ATTRACTION)
 		{
@@ -78,13 +80,14 @@ public class Visitor implements IStateChangeable
 			_plan = new ArrayList<AbstractEntertainment>();
 		_plan.add(entertainment);
 	}
+	
 	public String getPlanString()
 	{
-		String str = "";
+		String str = "Todo List :";
 		
-		for (int i = 0; i < this._plan.size(); i++)
+		for (int i = this._number; i < this._plan.size(); i++)
 		{
-			str += this._plan.get(i) + "\n";
+			str += "\n\t" + i + "-" + this._plan.get(i).getName();
 		}
 		return (str);
 	}

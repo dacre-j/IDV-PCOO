@@ -18,5 +18,6 @@ public abstract class AbstractEntertainment
 	public EEntertainmentType getType() { return (this._type); }
 	public EClientState getState() { return (this._state); }
 	
+	public abstract String getName();
 	public abstract String toString();
 }
