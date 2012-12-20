@@ -24,7 +24,7 @@ public class Game extends AbstractAttraction{
 	public String toString()
 	{
 		return super.toString() + "\n\tAge Minimum : " + this.ageMin +
-				":\n\tTaille Minimum : " + this.tailleMin;
+				"\n\tTaille Minimum : " + this.tailleMin;
 	}
 
 	public int getAgeMin() { return ageMin; }

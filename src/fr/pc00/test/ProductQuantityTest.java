@@ -25,13 +25,19 @@ public class ProductQuantityTest {
 	@Test
 	public void testProductQuantity()
 	{
-		quantity = new ProductQuantity(new Product("Kiwi", 2, EProductType.FOOD), 10);
+		ProductQuantity quantity2 = new ProductQuantity(new Product("Kiwi", 2, EProductType.FOOD), 10);
+		
+		assertNotNull(quantity2);
 	}
 
 	@Test
 	public void testGetProduct()
 	{
-		assertEquals(new Product("Bananes", 1, EProductType.FOOD), quantity.getProduct());
+		Product test = quantity.getProduct();
+		
+		assertEquals("Bananes", test.getName());
+		assertEquals(1, test.getPrice());
+		assertEquals(EProductType.FOOD, test.getType());
 	}
 
 	@Test

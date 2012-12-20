@@ -43,7 +43,6 @@ public enum EClientState
 
 	public String getNextStepState(EClientState state)
 	{
-		System.out.println(this._nextStepStates.toString());
 		if (state.equals(VISIT_ENDED) || state.equals(VISIT_NULL))
 			return (null);
 		if (this._nextStepStates.size() == 1)

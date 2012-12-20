@@ -16,13 +16,15 @@ public class Visitor implements IStateChangeable
 {
 	private List<AbstractEntertainment>	_plan;
 	private EClientState				_state;
+	private String						_name;
 	private int							_number;
 	private int							_tickets;
 
-	public Visitor(int money)
+	public Visitor(String name, int money)
 	{
 		this._plan = new ArrayList<AbstractEntertainment>();
 		this._state = EClientState.VISIT_STARTED;
+		this._name = name;
 		this._number = 0;
 		this._tickets = money;
 	}
@@ -37,8 +39,6 @@ public class Visitor implements IStateChangeable
 	{
 		AbstractEntertainment current;
 		
-		System.out.println("Getting " + this._number + "/" + this._plan.size());
-
 		if (this._plan.size() < this._number + 1)
 			return (EClientState.VISIT_ENDED);
 		
@@ -68,13 +68,14 @@ public class Visitor implements IStateChangeable
 				this._tickets -= totalPrice;
 		}
 		++this._number;
-		System.out.println("Searching " + this._number + "/" + this._plan.size() +
-				" : " + current.getState().name());
+
 		return (current.getState());
 	}
 	
 	public void addEntertainmentToPlan(AbstractEntertainment entertainment)
 	{
+		if (_plan == null)
+			_plan = new ArrayList<AbstractEntertainment>();
 		_plan.add(entertainment);
 	}
 	public String getPlanString()
@@ -88,9 +89,20 @@ public class Visitor implements IStateChangeable
 		return (str);
 	}
 	
+	public String toString()
+	{
+		return "Hi ! I'm " + this._name +
+				".\n\tThere is " + this._number +
+				" other people with me.\n\tI have " + this._tickets + " tickets in my wallet.";
+	}
+	
 	public List<AbstractEntertainment> getPlan() { return this._plan; }
 	public EClientState getState() { return this._state; }
+	public String getName() { return _name; }
+	public int getNumber() { return _number; }
+	public int getTickets() { return _tickets; }
 
+	public void setTickets(int _tickets) { this._tickets = _tickets; }
 	public void setPlan(List<AbstractEntertainment> plan) { this._plan = plan; }
  	public void setState(EClientState state) { this._state = state; }
 }

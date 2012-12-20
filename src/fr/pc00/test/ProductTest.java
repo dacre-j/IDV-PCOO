@@ -26,7 +26,9 @@ public class ProductTest {
 	@Test
 	public void testProduct()
 	{
-		product = new Product("Bananes", 42, EProductType.FOOD);
+		Product product2 = new Product("Bananes", 42, EProductType.FOOD);
+		
+		assertNotNull(product2);
 	}
 
 	@Test

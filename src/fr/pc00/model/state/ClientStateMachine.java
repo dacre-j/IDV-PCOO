@@ -14,6 +14,8 @@ public class ClientStateMachine {
 		
 		temp = statedReference.getState().getNextStepState(
 				((Visitor)statedReference).nextEntertainment());
+		if (temp == null)
+			throw new InvalidException("There is no more states.");
 		switch (temp)
 		{
 		case "VISIT_STARTED" :

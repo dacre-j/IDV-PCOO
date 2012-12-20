@@ -22,7 +22,7 @@ public abstract class AbstractShop extends AbstractEntertainment {
 		StringBuffer sb = new StringBuffer();
 		
 		str = "Boutique :\n\tName : " + this._name +
-				"Produits :";
+				"\n\tProduits :";
 		
 		for (int i = 0; i < this._products.size(); ++i)
 		{

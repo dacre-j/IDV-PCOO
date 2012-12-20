@@ -7,6 +7,8 @@ import org.junit.Before;
 import org.junit.Test;
 
 import fr.pc00.model.*;
+import fr.pc00.model.state.EClientState;
+import fr.pc00.model.utils.ProductQuantity;
 import fr.pc00.implement.*;
 
 public class AbstractEntertainmentTest {
@@ -17,6 +19,7 @@ public class AbstractEntertainmentTest {
 	public void setUp() throws Exception {
 		attraction = new Game("Grand Huit", 2, 12);
 		shop = new FoodStall("Bananeraie");
+		((FoodStall)shop).addProduct(new ProductQuantity(new Product("Bananes", 1, EProductType.FOOD), 30));
 	}
 
 	@After
@@ -25,22 +28,30 @@ public class AbstractEntertainmentTest {
 
 	@Test
 	public void testAbstractEntertainment() {
-		fail("Not yet implemented");
+		AbstractEntertainment attraction2 = new Game("Grand Splash", 2, 12);
+		
+		assertNotNull(attraction2);
 	}
 
 	@Test
 	public void testGetType() {
-		fail("Not yet implemented");
+		assertEquals(EEntertainmentType.ATTRACTION, attraction.getType());
+		assertEquals(EEntertainmentType.SHOP, shop.getType());
 	}
 
 	@Test
 	public void testGetState() {
-		fail("Not yet implemented");
+		assertEquals(EClientState.VISIT_ATTRACTION, attraction.getState());
+		assertEquals(EClientState.VISIT_SHOP, shop.getState());
 	}
 
 	@Test
 	public void testToString() {
-		fail("Not yet implemented");
+		String testAtt = "Attraction :\n\tName : Grand Huit\n\tPrix : 2\n\tNombre de places : 12\n\tAge Minimum : 0\n\tTaille Minimum : 0.0";
+		String testShop = "Boutique :\n\tName : Bananeraie\n\tProduits :\n\t\t-Bananes (1)";
+		
+		assertEquals(testAtt, attraction.toString());
+		assertEquals(testShop, shop.toString());
 	}
 
 }

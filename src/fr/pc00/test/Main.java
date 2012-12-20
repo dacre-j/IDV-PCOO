@@ -22,8 +22,6 @@ public class Main
 		Product hotDogFrite = new Product("Hot-Dog & Frites", 2, EProductType.FOOD);
 		Product water = new Product("Water", 0, EProductType.DRINK);
 		Product coca = new Product("Coca-Cola", 1, EProductType.DRINK);
-
-		System.out.println(coca.toString());
 		
 		AbstractEntertainment grandHuit = new Game("GrandHuit", 3, 16);
 		AbstractEntertainment grandSplash = new Game("GrandSplash", 3, 8);
@@ -48,25 +46,30 @@ public class Main
 		plan.add(friandises);
 		plan.add(grandeRoue);
 		
-//		Visitor jacques = new Visitor(30);
-//		
-//		try {
-//			ClientStateMachine.changeStep(jacques);
-//		} catch (InvalidException e) {
-//			System.out.println(e.getMessage());
-//		}
+		Visitor jacques = new Visitor("Jacques", 30);
+		
+		try {
+			ClientStateMachine.changeStep(jacques);
+		} catch (InvalidException e) {
+			System.out.println(e.getMessage());
+		}
 
-		Visitor pierre = new Visitor(30);
+		Visitor pierre = new Visitor("Pierre", 30);
 		pierre.setPlan(plan);
 
 		try {
-			//System.out.println(pierre.getPlanString());
-			ClientStateMachine.changeStep(pierre);
-			//System.out.println(pierre.getPlanString());
+			System.out.println(pierre.toString());
 			ClientStateMachine.changeStep(pierre);
 			ClientStateMachine.changeStep(pierre);
 			ClientStateMachine.changeStep(pierre);
-			//System.out.println(pierre.getPlanString());
+			ClientStateMachine.changeStep(pierre);
+			System.out.println(pierre.toString());
+			ClientStateMachine.changeStep(pierre);
+			ClientStateMachine.changeStep(pierre);
+			ClientStateMachine.changeStep(pierre);
+			ClientStateMachine.changeStep(pierre);
+			ClientStateMachine.changeStep(pierre);
+			ClientStateMachine.changeStep(pierre);
 		} catch (InvalidException e) {
 			System.out.println(e.getMessage());
 		}
